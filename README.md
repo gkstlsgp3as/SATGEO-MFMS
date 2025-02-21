@@ -52,10 +52,10 @@ app/algorithm/
 
 ### 2.2 인자 명칭 
 - 다음의 요소를 포함하도록 구성
-- **input/output/(없음)**: 입출력 데이터 및 폴더를 필요로 하는 경우 명시
+- **입출력 여부: input/output/(없음)**: 입출력 데이터 및 폴더를 필요로 하는 경우 명시
 - **대상**: 예) ais, grd, slc 등
      - 단, {중요명사}_{수식어구} 의 형태로 구성 ex) facilities_confirmed, vessel_detection 등 
-- **file/dir**
+- **파일/폴더 여부: file/dir**
 - 예) input_grd_file, output_json_file, work_dir, input_dir 등 
 
 
