@@ -18,6 +18,8 @@
 *.MOV
 *.avi
 *.data
+*.nitf
+*.nc
 #*.json
 *.cfg
 *.zip
