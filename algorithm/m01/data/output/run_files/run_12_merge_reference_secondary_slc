@@ -1,0 +1,8 @@
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_20240419
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_lat
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_lon
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_los
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_hgt
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_shadowMask
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_incLocal
+SentinelWrapper.py -c /disk1/swlee/processing/KCG/output/configs/config_merge_20240501

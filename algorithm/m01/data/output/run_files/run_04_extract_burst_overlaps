@@ -1,0 +1,1 @@
+subsetReference.py -m /disk1/swlee/processing/KCG/output/reference -g /disk1/swlee/processing/KCG/output/geom_reference

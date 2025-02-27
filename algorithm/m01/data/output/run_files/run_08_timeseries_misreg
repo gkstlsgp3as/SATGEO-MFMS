@@ -1,0 +1,2 @@
+invertMisreg.py -i /disk1/swlee/processing/KCG/output/misreg/azimuth/pairs/ -o /disk1/swlee/processing/KCG/output/misreg/azimuth/dates/
+invertMisreg.py -i /disk1/swlee/processing/KCG/output/misreg/range/pairs/ -o /disk1/swlee/processing/KCG/output/misreg/range/dates/

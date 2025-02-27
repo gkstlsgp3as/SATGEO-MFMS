@@ -179,12 +179,6 @@ def geographicToIntrinsic(tif_ref, lat, lon):
         lon_x = interp1d(lon_array, lon_order, fill_value='extrapolate')
         x = lon_x(lon)
 
-    # if len(lat)==1:
-    #    y=float(y)
-
-    # if len(lon)==1:
-    #    x=float(x)
-
     return y, x
 
 

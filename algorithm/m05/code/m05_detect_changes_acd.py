@@ -41,8 +41,8 @@ def AmplitudeCDchip(input_grd_before_file, input_grd_after_file, output_file):
     # Perform p-value estimation
     m2logQ = sglr.calM2logQchip(beforeSAR, afterSAR, m=4.4)      
     #m2logQ = m2logQ - np.min(m2logQ)
-    p_value = 1 - sglr.chi2Cdf(m2logQ, 50)
-    p_value = sglr.chi2Cdf(m2logQ, 50)
+    # p_value = 1 - sglr.chi2Cdf(m2logQ, 50)
+    p_value = sglr.chi2Cdf(m2logQ, 500)
     #p_value = sglr.chi2Cdf(m2logQ, 2)
     
     print(ratio)
@@ -55,6 +55,8 @@ def AmplitudeCDchip(input_grd_before_file, input_grd_after_file, output_file):
     
     # Extract changed region
     mask_overlay = ma.masked_where(cmap_filteres == 0, cmap_filteres)
+    mask_overlay = 1-mask_overlay.data
+    #mask_overlay[mask_overlay != 0] = 1
     nrows, ncols, nband = beforeSAR.shape
     
     p_value_num = p_value
@@ -67,29 +69,28 @@ def AmplitudeCDchip(input_grd_before_file, input_grd_after_file, output_file):
         from rasterio.transform import from_origin
         transform = from_origin(beforeSAR_gt[0], beforeSAR_gt[1], beforeSAR_gt[1], -beforeSAR_gt[5])
         crs = 'EPSG:4326'
-        
         with rasterio.open(
             output_file, 'w',
             driver='GTiff',
             height=beforeSAR.shape[0],
             width=beforeSAR.shape[1],
-            count=3,  # number of layers/bands
+            count=1,  # number of layers/bands
             dtype=beforeSAR.dtype,
             crs=crs,
             transform=transform
-        ) as dst:                           
-            dst.write(p_value_num, 1)  
-            dst.write(m2logQ, 2)  
-            dst.write(mask_overlay, 3)  
+        ) as dst:
+            dst.write(mask_overlay, 1)
+            #dst.write(p_value_num, 1)
+            #dst.write(m2logQ, 2)
+            #dst.write(mask_overlay, 3)
     
         print('============================================================')
-        print(time.time()-startT,'sec')
-        
+        print(time.time()-startT,'sec') 
     
     except:
         # GDAL을 사용하여 GeoTIFF 파일 생성
         driver = gdal.GetDriverByName('GTiff')
-        dataset = driver.Create('output.tif', ncols, nrows, 1, gdal.GDT_Float32)
+        dataset = driver.Create(output_file, ncols, nrows, 1, gdal.GDT_Float32)
 
         # 변환 매트릭스 설정
         geotransform = (beforeSAR_gt[0], beforeSAR_gt[1], 0, beforeSAR_gt[4], 0, beforeSAR_gt[5])
@@ -101,13 +102,14 @@ def AmplitudeCDchip(input_grd_before_file, input_grd_after_file, output_file):
         dataset.SetProjection(srs.ExportToWkt())
         
         # 데이터 작성
-        dataset.GetRasterBand(1).WriteArray(p_value_num)
+        dataset.GetRasterBand(1).WriteArray(mask_overlay)
         
         # 파일 닫기 및 저장
         dataset.FlushCache()
         dataset = None
         print('============================================================')
         print(time.time()-startT,'sec')
+      
       
 def geotiffread_rasterio(tif_name):
     import rasterio
@@ -178,14 +180,14 @@ def get_args():
     parser.add_argument(
         '--input_grd_before_file', 
         type=str, 
-        required=True,
+        default='../data/input/S1A_IW_GRDH_1SDV_20181012T092305_20181012T092334_024101_02A27F_A58E_ROI.tif',
         help='before SAR image file'
         )
     
     parser.add_argument(
         '--input_grd_after_file', 
         type=str, 
-        required=True,
+        default='../data/input/S1A_IW_GRDH_1SDV_20181024T092305_20181024T092334_024276_02A828_F6A2_ROI.tif',
         help='after SAR image file'
         )
     

@@ -1,0 +1,12 @@
+{
+    "satellite": "LANDSAT_9",
+    "sensor": "OLI_TIRS",
+    "date_acquired": "2024-08-14",
+    "scene_center_time": "02:04:27.9137210Z",
+    "projection": "UTM",
+    "spatial_resolution": 30,
+    "RADIANCE_MULT_BAND_10": 0.00038,
+    "RADIANCE_ADD_BAND_10": 0.1,
+    "K1_CONSTANT_BAND_10": 799.0284,
+    "K2_CONSTANT_BAND_10": 1329.2405
+}

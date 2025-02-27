@@ -1,0 +1,3 @@
+swath: IW2
+Bperp (average): 0.9198121791619447
+Bpar (average): 2.8745754346575616

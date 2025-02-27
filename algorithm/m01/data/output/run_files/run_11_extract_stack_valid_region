@@ -1,0 +1,1 @@
+extractCommonValidRegion.py -m /disk1/swlee/processing/KCG/output/reference -s /disk1/swlee/processing/KCG/output/coreg_secondarys
